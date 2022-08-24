@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Categories from "components/Categories";
 import Sort from "components/Sort";
 import PizzaBlock from "components/PizzaBlock";
@@ -6,8 +6,10 @@ import Skeleton from "components/PizzaBlock/Skeleton";
 import Pagination from "components/Pagination";
 
 import { getPizzas } from "api/pizzas";
+import { SearchContext } from "App";
 
-const Home = ({ searchValue }) => {
+const Home = () => {
+  const { searchValue } = useContext(SearchContext);
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
@@ -26,7 +28,7 @@ const Home = ({ searchValue }) => {
         setPizzas(res);
         setIsLoading(false);
       });
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
   }, [categoryId, sortType.sortProperty, searchValue, currentPage]);
 
   const items = pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
