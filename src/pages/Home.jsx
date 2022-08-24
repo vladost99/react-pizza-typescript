@@ -13,8 +13,11 @@ const Home = () => {
   const { searchValue } = useContext(SearchContext);
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const {categoryId, sort: sortType} = useSelector(state => state.filters);
-  const [currentPage, setCurrentPage] = useState(1);
+  const {
+    categoryId,
+    sort: sortType,
+    currentPage,
+  } = useSelector((state) => state.filters);
 
   useEffect(() => {
     setIsLoading(true);
@@ -41,10 +44,7 @@ const Home = () => {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeletons : items}</div>
-      <Pagination
-        currentPage={currentPage}
-        onChangePage={(number) => setCurrentPage(number)}
-      />
+      <Pagination />
     </div>
   );
 };
