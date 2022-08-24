@@ -7,18 +7,14 @@ import Pagination from "components/Pagination";
 
 import { getPizzas } from "api/pizzas";
 import { SearchContext } from "App";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const { searchValue } = useContext(SearchContext);
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [categoryId, setCategoryId] = useState(0);
+  const {categoryId, sort: sortType} = useSelector(state => state.filters);
   const [currentPage, setCurrentPage] = useState(1);
-
-  const [sortType, setSortType] = useState({
-    name: "популярности",
-    sortProperty: "rating",
-  });
 
   useEffect(() => {
     setIsLoading(true);
@@ -40,15 +36,15 @@ const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories
-          onChangeCategory={(index) => setCategoryId(index)}
-          value={categoryId}
-        />
-        <Sort value={sortType} onChangeSort={(index) => setSortType(index)} />
+        <Categories />
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeletons : items}</div>
-      <Pagination currentPage={currentPage} onChangePage={(number) => setCurrentPage(number)} />
+      <Pagination
+        currentPage={currentPage}
+        onChangePage={(number) => setCurrentPage(number)}
+      />
     </div>
   );
 };

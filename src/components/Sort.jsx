@@ -1,13 +1,20 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { changeSort } from "redux/slices/filterSlice";
 
-const Sort = ({ value, onChangeSort }) => {
+const Sort = () => {
   const [open, setOpen] = useState(false);
   const list = [
     { name: "популярности", sortProperty: "rating" },
     { name: "цене", sortProperty: "price" },
     { name: "алфавиту", sortProperty: "title" },
   ];
+  const dispatch = useDispatch();
+  const value = useSelector((state) => state.filters.sort);
 
+  const onChangeSort = (obj) => {
+    dispatch(changeSort(obj));
+  };
 
   const setSort = (obj) => {
     onChangeSort(obj);
@@ -39,7 +46,9 @@ const Sort = ({ value, onChangeSort }) => {
               <li
                 onClick={() => setSort(obj)}
                 key={obj.name}
-                className={(value.sortProperty === obj.sortProperty && "active") || ""}
+                className={
+                  (value.sortProperty === obj.sortProperty && "active") || ""
+                }
               >
                 {obj.name}
               </li>
