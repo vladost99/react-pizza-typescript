@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import QueryString from "qs";
 import { useNavigate } from "react-router-dom";
 import { setFilters } from "redux/slices/filterSlice";
-import { fetchPizzas } from "redux/slices/pizzaSlice";
+import { fetchPizzas, selectorPizzas } from "redux/slices/pizzaSlice";
 
 const Home = () => {
   const { searchValue } = useContext(SearchContext);
@@ -21,7 +21,7 @@ const Home = () => {
     sort: sortType,
     currentPage,
   } = useSelector((state) => state.filters);
-  const { items: pizzas, status } = useSelector((state) => state.pizza);
+  const { items: pizzas, status } = useSelector(selectorPizzas);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

@@ -1,11 +1,16 @@
 import{ createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getPizzas } from "api/pizzas";
 
-export const fetchPizzas = createAsyncThunk('pizza/fetchPizzasStatus', async (params) => {
+export const fetchPizzas = createAsyncThunk('pizza/fetchPizzasStatus', async (params, thunkAPI) => {
     
     const {categoryId, sortType, searchValue, currentPage} = params;
     const response = await getPizzas(categoryId, sortType, searchValue, currentPage).then(res => res.json());
-    return response;
+
+    if(response.length === 0) {
+        return thunkAPI.rejectWithValue('Пиццы пустые');
+    }
+
+    return thunkAPI.fulfillWithValue(response);
 })
 
 
@@ -37,6 +42,8 @@ export const pizzasSlice = createSlice({
         }
     }
 });
+
+export const selectorPizzas = state => state.pizza;
 
 export const {setPizzas} = pizzasSlice.actions;
 export default pizzasSlice.reducer;

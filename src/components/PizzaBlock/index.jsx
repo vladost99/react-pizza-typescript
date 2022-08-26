@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import PlusSvg from "assets/img/plus.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "redux/slices/cartSlice";
+import { addItem, selectCart } from "redux/slices/cartSlice";
 
 const PizzaBlock = ({ name, price, imageUrl, sizes, types, id }) => {
   const [activeSize, setActiveSize] = useState(sizes[0]);
   const [activeType, setActiveType] = useState(types[0]);
   const typeNames = ["тонкое", "традиционное"];
   const dispatch = useDispatch();
-  const cartItem = useSelector(state => state.cart.items.find(item => item.id === id));
+  const {items: cartItems} =  useSelector(selectCart);
+  const cartItem = cartItems.find(item => item.id === id);
 
 
   const addItemToCart = () => {

@@ -1,7 +1,7 @@
 import useClickOutside from "hooks/useClickOutside";
 import React, {  useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeSort } from "redux/slices/filterSlice";
+import { changeSort, selectFilters } from "redux/slices/filterSlice";
 
 export const sortList = [
   { name: "популярности", sortProperty: "rating" },
@@ -13,7 +13,7 @@ const Sort = () => {
   const [open, setOpen] = useState(false);
   const sortRef = useRef();
   const dispatch = useDispatch();
-  const value = useSelector((state) => state.filters.sort);
+  const {sort:value} = useSelector(selectFilters);
 
   const onChangeSort = (obj) => {
     dispatch(changeSort(obj));

@@ -5,11 +5,11 @@ import { ReactComponent as CartSvg } from "assets/img/cart.svg";
 import { ReactComponent as GreyArrowLeftSvg } from "assets/img/grey-arrow-left.svg";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearItems } from "redux/slices/cartSlice";
+import { clearItems, selectCart } from "redux/slices/cartSlice";
 import CartEmpty from "components/Cart/CartEmpty";
 
 const Cart = () => {
-  const { items, totalPrice } = useSelector((state) => state.cart);
+  const { items, totalPrice } = useSelector(selectCart);
   const totalCount = items.reduce((sum, obj) => obj.count + sum, 0);
   const dispatch = useDispatch();
 
