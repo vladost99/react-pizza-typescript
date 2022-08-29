@@ -8,7 +8,7 @@ import Pagination from "components/Pagination";
 import { SearchContext } from "App";
 import { useDispatch, useSelector } from "react-redux";
 import QueryString from "qs";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setFilters } from "redux/slices/filterSlice";
 import { fetchPizzas, selectorPizzas } from "redux/slices/pizzaSlice";
 
@@ -61,7 +61,7 @@ const Home = () => {
     isSearch.current = false;
   }, [categoryId, sortType.sortProperty, searchValue, currentPage]);
 
-  const items = pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
+  const items = pizzas.map((pizza) => <Link to={`/pizza/${pizza.id}`} key={pizza.id}><PizzaBlock  {...pizza} /></Link>);
 
   const skeletons = [...new Array(6)].map((el, index) => (
     <Skeleton key={index} />

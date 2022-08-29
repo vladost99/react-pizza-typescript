@@ -8,14 +8,20 @@ const PizzaBlock = ({ name, price, imageUrl, sizes, types, id }) => {
   const [activeType, setActiveType] = useState(types[0]);
   const typeNames = ["тонкое", "традиционное"];
   const dispatch = useDispatch();
-  const {items: cartItems} =  useSelector(selectCart);
-  const cartItem = cartItems.find(item => item.id === id);
-
+  const { items: cartItems } = useSelector(selectCart);
+  const cartItem = cartItems.find((item) => item.id === id);
 
   const addItemToCart = () => {
-    const item = {id,name,price,imageUrl,type: typeNames[activeType], size: activeSize};
+    const item = {
+      id,
+      name,
+      price,
+      imageUrl,
+      type: typeNames[activeType],
+      size: activeSize,
+    };
     dispatch(addItem(item));
-  }
+  };
 
   return (
     <div className="pizza-block-wrapper">
@@ -48,10 +54,13 @@ const PizzaBlock = ({ name, price, imageUrl, sizes, types, id }) => {
         </div>
         <div className="pizza-block__bottom">
           <div className="pizza-block__price">от {price} ₽</div>
-          <div onClick={addItemToCart} className="button button--outline button--add">
+          <div
+            onClick={addItemToCart}
+            className="button button--outline button--add"
+          >
             <img src={PlusSvg} />
             <span>Добавить</span>
-            <i>{cartItem && cartItem.count || 0}</i>
+            <i>{(cartItem && cartItem.count) || 0}</i>
           </div>
         </div>
       </div>
