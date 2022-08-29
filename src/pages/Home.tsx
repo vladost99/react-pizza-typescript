@@ -11,6 +11,7 @@ import QueryString from "qs";
 import { Link, useNavigate } from "react-router-dom";
 import { selectFilters, setFilters } from "redux/slices/filterSlice";
 import { fetchPizzas, selectorPizzas } from "redux/slices/pizzaSlice";
+import { useAppDispatch } from "redux/store";
 
 const Home: React.FC = () => {
  // const { searchValue } = useContext(SearchContext);
@@ -24,17 +25,17 @@ const Home: React.FC = () => {
   } = useSelector(selectFilters);
   const { items: pizzas, status } = useSelector(selectorPizzas);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (window.location.search) {
       const params = QueryString.parse(window.location.search.substring(1));
+      const sort = sortList.find((el) => el.sortProperty === params.sortProperty) || sortList[0];
       dispatch(
         setFilters({
-          ...params,
-          sort:
-            sortList.find((el) => el.sortProperty === params.sortProperty) ||
-            sortList[0],
+          categoryId: Number(params.categoryId),
+          sort,
+          currentPage: Number(params.currentPage)
         })
       );
       isSearch.current = true;
@@ -56,7 +57,6 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     if (!isSearch.current) {
-      //@ts-ignore
       dispatch(fetchPizzas({ categoryId, searchValue, sortType, currentPage }));
     }
 

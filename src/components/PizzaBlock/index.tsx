@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PlusSvg from "assets/img/plus.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, selectCart } from "redux/slices/cartSlice";
+import { addItem, CartItem, selectCart, selectCartItemById } from "redux/slices/cartSlice";
 
 
 type PizzaBlockProps = {
@@ -19,16 +19,17 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ name, price, imageUrl, sizes, t
   const typeNames = ["тонкое", "традиционное"];
   const dispatch = useDispatch();
   const { items: cartItems } = useSelector(selectCart);
-  const cartItem = cartItems.find((item: PizzaBlockProps) => item.id === id);
+  const cartItem = useSelector(selectCartItemById(id));
 
   const addItemToCart = () => {
-    const item = {
+    const item: CartItem = {
       id,
       name,
       price,
       imageUrl,
       type: typeNames[activeType],
       size: activeSize,
+      count: 0
     };
     dispatch(addItem(item));
   };

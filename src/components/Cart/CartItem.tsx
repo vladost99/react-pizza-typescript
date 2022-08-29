@@ -26,7 +26,7 @@ const CartItem: React.FC<CartItemProps> = ({name, size, type, count, price, imag
 
   const changeCount = (type: string) => {
    if(type === 'remove') dispatch(minusCountItem({id}));
-   else dispatch(addItem({id}))
+   else dispatch(addItem({name, size, type, count, price, imageUrl, id}))
   }
 
 
