@@ -3,13 +3,23 @@ import PlusSvg from "assets/img/plus.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, selectCart } from "redux/slices/cartSlice";
 
-const PizzaBlock = ({ name, price, imageUrl, sizes, types, id }) => {
+
+type PizzaBlockProps = {
+  name: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+  types: number[];
+  id: string;
+}
+
+const PizzaBlock: React.FC<PizzaBlockProps> = ({ name, price, imageUrl, sizes, types, id }) => {
   const [activeSize, setActiveSize] = useState(sizes[0]);
   const [activeType, setActiveType] = useState(types[0]);
   const typeNames = ["тонкое", "традиционное"];
   const dispatch = useDispatch();
   const { items: cartItems } = useSelector(selectCart);
-  const cartItem = cartItems.find((item) => item.id === id);
+  const cartItem = cartItems.find((item: PizzaBlockProps) => item.id === id);
 
   const addItemToCart = () => {
     const item = {

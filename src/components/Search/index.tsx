@@ -1,11 +1,12 @@
-import { SearchContext } from "App";
-import React, { useCallback, useContext, useState } from "react";
+//import { SearchContext } from "App.tsx";
+import React, { useCallback,  useState } from "react";
 import styles from "./Search.module.scss";
 import debounce from "lodash.debounce";
 
-const Search = () => {
-  const { searchValue, setSearchValue } = useContext(SearchContext);
-  const [value, setValue] = useState('');
+const Search: React.FC = () => {
+  //const { searchValue, setSearchValue } = useContext<{searchValue, setSearchValue:}>(SearchContext<>);
+  const [searchValue, setSearchValue ] = useState<string>('');
+  const [value, setValue] = useState<string>('');
 
 
   const clearInput = () => {
@@ -14,13 +15,13 @@ const Search = () => {
   }
 
   const updateSearchValue = useCallback(
-    debounce((str) => {
+    debounce((str: string) => {
       setSearchValue(str);
     }, 250),
     []
   );
 
-  const onChangeInput = (event) => {
+  const onChangeInput = (event: any) => {
     setValue(event.target.value);
     updateSearchValue(event.target.value);
   }

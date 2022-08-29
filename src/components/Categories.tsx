@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectFilters, setCategoryId } from "redux/slices/filterSlice";
 
-const Categories = () => {
+const Categories: React.FC = () => {
   const {categoryId:value} = useSelector(selectFilters);
   const dispatch = useDispatch();
 

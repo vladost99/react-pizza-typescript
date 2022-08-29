@@ -5,22 +5,23 @@ import PizzaBlock from "components/PizzaBlock";
 import Skeleton from "components/PizzaBlock/Skeleton";
 import Pagination from "components/Pagination";
 
-import { SearchContext } from "App";
+//import { SearchContext } from "src/App.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import QueryString from "qs";
 import { Link, useNavigate } from "react-router-dom";
-import { setFilters } from "redux/slices/filterSlice";
+import { selectFilters, setFilters } from "redux/slices/filterSlice";
 import { fetchPizzas, selectorPizzas } from "redux/slices/pizzaSlice";
 
-const Home = () => {
-  const { searchValue } = useContext(SearchContext);
+const Home: React.FC = () => {
+ // const { searchValue } = useContext(SearchContext);
+  const searchValue = '';
   const isSearch = useRef(false);
   const isMounted = useRef(false);
   const {
     categoryId,
     sort: sortType,
     currentPage,
-  } = useSelector((state) => state.filters);
+  } = useSelector(selectFilters);
   const { items: pizzas, status } = useSelector(selectorPizzas);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -55,13 +56,15 @@ const Home = () => {
 
   useEffect(() => {
     if (!isSearch.current) {
+      //@ts-ignore
       dispatch(fetchPizzas({ categoryId, searchValue, sortType, currentPage }));
     }
 
     isSearch.current = false;
   }, [categoryId, sortType.sortProperty, searchValue, currentPage]);
 
-  const items = pizzas.map((pizza) => <Link to={`/pizza/${pizza.id}`} key={pizza.id}><PizzaBlock  {...pizza} /></Link>);
+  //const items = pizzas.map((pizza) => <Link to={`/pizza/${pizza.id}`} key={pizza.id}><PizzaBlock  {...pizza} /></Link>);
+  const items = pizzas.map((pizza: any) => <PizzaBlock key={pizza.id}  {...pizza} />);
 
   const skeletons = [...new Array(6)].map((el, index) => (
     <Skeleton key={index} />

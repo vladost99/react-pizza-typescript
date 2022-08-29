@@ -2,9 +2,13 @@ import { getPizza } from "api/pizzas";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const FullPizza = () => {
+const FullPizza: React.FC = () => {
   const { id } = useParams();
-  const [pizza, setPizza] = useState(null);
+  const [pizza, setPizza] = useState<{
+    imageUrl: string;
+    name: string;
+    price: number;
+  }>();
 
   useEffect(() => {
     getPizza(id).then((res) => setPizza(res));

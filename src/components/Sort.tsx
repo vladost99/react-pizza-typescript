@@ -3,23 +3,30 @@ import React, {  useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeSort, selectFilters } from "redux/slices/filterSlice";
 
-export const sortList = [
+
+
+type SortItem = {
+  name: string;
+  sortProperty:  string;
+}
+
+export const sortList: SortItem[]  = [
   { name: "популярности", sortProperty: "rating" },
   { name: "цене", sortProperty: "price" },
   { name: "алфавиту", sortProperty: "title" },
 ];
 
-const Sort = () => {
+const Sort: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const sortRef = useRef();
+  const sortRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const {sort:value} = useSelector(selectFilters);
 
-  const onChangeSort = (obj) => {
+  const onChangeSort = (obj: SortItem) => {
     dispatch(changeSort(obj));
   };
 
-  const setSort = (obj) => {
+  const setSort = (obj: SortItem) => {
     onChangeSort(obj);
     setOpen(false);
   };

@@ -3,7 +3,18 @@ import { ReactComponent as PlusSvg } from "assets/img/plus.svg";
 import { useDispatch } from "react-redux";
 import { removeItem, minusCountItem, addItem} from "redux/slices/cartSlice";
 
-const CartItem = ({name, size, type, count, price, imageUrl, id}) => {
+
+type CartItemProps = {
+  name: string;
+  size: number
+  type: string;
+  count: number;
+  price: number;
+  imageUrl: string;
+  id: string;
+}
+
+const CartItem: React.FC<CartItemProps> = ({name, size, type, count, price, imageUrl, id}) => {
   const total = count * price;
   const dispatch = useDispatch();
 
@@ -13,7 +24,7 @@ const CartItem = ({name, size, type, count, price, imageUrl, id}) => {
    }
   }
 
-  const changeCount = (type) => {
+  const changeCount = (type: string) => {
    if(type === 'remove') dispatch(minusCountItem({id}));
    else dispatch(addItem({id}))
   }
