@@ -1,25 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "redux/store";
+import { calcTotalPrice } from "utils/calcTotalPrice";
+import { getCartFromLocalStorage, reduceTotalPriceFromLocalStorage, setCartLocalStorage } from "utils/localStorageFunc";
+import {ICartSliceState, CartItem} from 'redux/slices/types';
 
 
-export type CartItem = {
-    id: string;
-    name: string;
-    price: number;
-    imageUrl: string;
-    type: string;
-    size: number;
-    count: number;
-}
-
-interface ICartSliceState {
-    totalPrice: number;
-    items: CartItem[];
-}
 
 const initialState: ICartSliceState = {
-    totalPrice: 0,
-    items: []
+    totalPrice: reduceTotalPriceFromLocalStorage(),
+    items:  getCartFromLocalStorage(),
 };
 
 export const cartSlice = createSlice({
@@ -38,15 +27,17 @@ export const cartSlice = createSlice({
                     count: 1
                 })
             }
-            state.totalPrice = state.items.reduce((sum, obj) => (obj.price * obj.count) + sum, 0);
+            state.totalPrice = calcTotalPrice(state.items);
+            setCartLocalStorage(state.items);
         },
         removeItem: (state, action: PayloadAction<string>) => {
             state.items = state.items.filter(obj => obj.id !== action.payload);
-            state.totalPrice = state.items.reduce((sum, obj) => (obj.price * obj.count) + sum, 0);
+            state.totalPrice = calcTotalPrice(state.items);
         },
         clearItems: (state) => {
             state.items = [];
             state.totalPrice = 0;
+            setCartLocalStorage(state.items);
         },
         minusCountItem: (state, action: PayloadAction<{id: string}>) => {
             const findItem: CartItem | undefined = state.items.find(item => item.id === action.payload.id);
@@ -54,7 +45,8 @@ export const cartSlice = createSlice({
             if(!findItem) return
             
             findItem.count--;
-            state.totalPrice = state.items.reduce((sum, obj) => (obj.price * obj.count) + sum, 0);
+            state.totalPrice = calcTotalPrice(state.items);
+            setCartLocalStorage(state.items);
         }
     }
 })

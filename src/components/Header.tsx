@@ -4,10 +4,22 @@ import LogoSvg from "assets/img/pizza-logo.svg";
 import Search from "components/Search";
 import { useSelector } from "react-redux";
 import { selectCart } from "redux/slices/cartSlice";
+import { setCartLocalStorage } from "utils/localStorageFunc";
 
 const Header: React.FC = () => {
   const {totalPrice, items} = useSelector(selectCart);
   const location = useLocation();
+  const isMounted = React.useRef(false);
+
+
+  React.useEffect(() => {
+    if(isMounted.current) {
+      setCartLocalStorage(items);
+    }
+    isMounted.current = true;
+  }, [items]);
+
+
   return (
     <div className="header">
       <div className="container">

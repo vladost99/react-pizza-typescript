@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, {useEffect, useRef } from "react";
 import Categories from "components/Categories";
 import Sort, { sortList } from "components/Sort";
 import PizzaBlock from "components/PizzaBlock";
@@ -60,7 +60,6 @@ const Home: React.FC = () => {
     isSearch.current = false;
   }, [categoryId, sortType.sortProperty, searchValue, currentPage]);
 
-  //const items = pizzas.map((pizza) => <Link to={`/pizza/${pizza.id}`} key={pizza.id}><PizzaBlock  {...pizza} /></Link>);
   const items = pizzas.map((pizza: any) => <PizzaBlock key={pizza.id}  {...pizza} />);
 
   const skeletons = [...new Array(6)].map((el, index) => (

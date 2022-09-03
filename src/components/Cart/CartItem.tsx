@@ -2,20 +2,12 @@ import React from "react";
 import { ReactComponent as PlusSvg } from "assets/img/plus.svg";
 import { useDispatch } from "react-redux";
 import { removeItem, minusCountItem, addItem} from "redux/slices/cartSlice";
+import { CartItem } from "redux/slices/types";
 import clsx from "clsx";
 
 
-type CartItemProps = {
-  name: string;
-  size: number
-  type: string;
-  count: number;
-  price: number;
-  imageUrl: string;
-  id: string;
-}
 
-const CartItem: React.FC<CartItemProps> = ({name, size, type, count, price, imageUrl, id}) => {
+const CartItemC: React.FC<CartItem> = ({name, size, type, count, price, imageUrl, id}) => {
   const total = count * price;
   const dispatch = useDispatch();
 
@@ -69,4 +61,4 @@ const CartItem: React.FC<CartItemProps> = ({name, size, type, count, price, imag
   );
 };
 
-export default CartItem;
+export default CartItemC;
