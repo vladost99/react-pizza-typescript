@@ -251,6 +251,10 @@ body {
 
           &--disabled {
             opacity: 0.4;
+
+            &:active {
+              transform: none;
+            }
             &:hover {
               background-color: #fe5f1e;
             }

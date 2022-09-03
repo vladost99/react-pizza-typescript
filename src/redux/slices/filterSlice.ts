@@ -11,6 +11,7 @@ interface IFilterSliceState {
     categoryId: number;
     sort: Sort;
     currentPage: number;
+    searchValue?: string;
 }
 
 
@@ -21,7 +22,8 @@ const initialState: IFilterSliceState = {
         name: 'популярности',
         sortProperty: 'rating'
     },
-    currentPage: 1
+    currentPage: 1,
+    searchValue: ''
 };
 
 export const filtersSlice = createSlice({
@@ -41,6 +43,9 @@ export const filtersSlice = createSlice({
             state.currentPage = Number(action.payload.currentPage);
             state.sort = action.payload.sort;
             state.categoryId = Number(action.payload.categoryId);
+        },
+        setValueSearch: (state, action: PayloadAction<string>) => {
+            state.searchValue = action.payload;
         }
     }
 })
@@ -48,5 +53,5 @@ export const filtersSlice = createSlice({
 
 export const selectFilters = (state: RootState) => state.filters;
 
-export const {setCategoryId, changeSort, setCurrentPage, setFilters} = filtersSlice.actions;
+export const {setCategoryId, changeSort, setCurrentPage, setFilters, setValueSearch} = filtersSlice.actions;
 export default filtersSlice.reducer;

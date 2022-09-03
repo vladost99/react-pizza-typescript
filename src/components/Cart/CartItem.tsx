@@ -46,11 +46,11 @@ const CartItem: React.FC<CartItemProps> = ({name, size, type, count, price, imag
           <p>{type}, {size} см.</p>
         </div>
         <div className="cart__item-wrapper-count">
-          <div  onClick={() => changeCount('remove')} className={clsx('button button--outline button--circle cart__item-wrapper-count-minus', {
+          <button disabled={count === 1}  onClick={() => changeCount('remove')} className={clsx('button button--outline button--circle cart__item-wrapper-count-minus', {
             'cart__item-wrapper-count-minus--disabled': count === 1
           })}>
             <PlusSvg />
-          </div>
+          </button>
           <b>{count}</b>
           <div  onClick={() => changeCount('add')} className="button button--outline button--circle cart__item-wrappercount-plus">
             <PlusSvg />

@@ -4,18 +4,14 @@ import Sort, { sortList } from "components/Sort";
 import PizzaBlock from "components/PizzaBlock";
 import Skeleton from "components/PizzaBlock/Skeleton";
 import Pagination from "components/Pagination";
-
-//import { SearchContext } from "src/App.tsx";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import QueryString from "qs";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { selectFilters, setFilters } from "redux/slices/filterSlice";
 import { fetchPizzas, selectorPizzas } from "redux/slices/pizzaSlice";
 import { useAppDispatch } from "redux/store";
 
 const Home: React.FC = () => {
- // const { searchValue } = useContext(SearchContext);
-  const searchValue = '';
   const isSearch = useRef(false);
   const isMounted = useRef(false);
   const {
@@ -24,6 +20,7 @@ const Home: React.FC = () => {
     currentPage,
   } = useSelector(selectFilters);
   const { items: pizzas, status } = useSelector(selectorPizzas);
+  const {searchValue} = useSelector(selectFilters);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 

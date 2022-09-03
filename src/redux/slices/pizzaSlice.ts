@@ -8,7 +8,7 @@ import { Sort } from "./filterSlice";
 type FetchPizzaArgs = {
     categoryId: string | number,
     sortType: Sort,
-    searchValue: string,
+    searchValue?: string,
     currentPage: string | number
 };
 

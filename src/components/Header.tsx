@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import LogoSvg from "assets/img/pizza-logo.svg";
-// import Search from "components/Search";
+import Search from "components/Search";
 import { useSelector } from "react-redux";
 import { selectCart } from "redux/slices/cartSlice";
 
@@ -20,7 +20,7 @@ const Header: React.FC = () => {
             </div>
           </div>
         </Link>
-        {/* <Search /> */}
+        <Search />
        {location.pathname !== '/cart' && ( <div className="header__cart">
           <Link to="/cart" className="button button--cart">
             <span>{totalPrice} ₽</span>
