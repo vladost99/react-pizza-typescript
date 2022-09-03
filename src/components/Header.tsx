@@ -33,7 +33,7 @@ const Header: React.FC = () => {
           </div>
         </Link>
         <Search />
-       {location.pathname !== '/cart' && ( <div className="header__cart">
+        <div className="header__cart">
           <Link to="/cart" className="button button--cart">
             <span>{totalPrice} ₽</span>
             <div className="button__delimiter"></div>
@@ -68,7 +68,7 @@ const Header: React.FC = () => {
             </svg>
             <span>{items.length}</span>
           </Link>
-        </div>)}
+        </div>
       </div>
     </div>
   );
