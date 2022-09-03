@@ -248,7 +248,15 @@ body {
               display: none;
             }
           }
+
+          &--disabled {
+            opacity: 0.4;
+            &:hover {
+              background-color: #fe5f1e;
+            }
+          }
         }
+
   
         b {
           font-size: 22px;

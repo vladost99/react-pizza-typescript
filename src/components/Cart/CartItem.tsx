@@ -2,6 +2,7 @@ import React from "react";
 import { ReactComponent as PlusSvg } from "assets/img/plus.svg";
 import { useDispatch } from "react-redux";
 import { removeItem, minusCountItem, addItem} from "redux/slices/cartSlice";
+import clsx from "clsx";
 
 
 type CartItemProps = {
@@ -45,7 +46,9 @@ const CartItem: React.FC<CartItemProps> = ({name, size, type, count, price, imag
           <p>{type}, {size} см.</p>
         </div>
         <div className="cart__item-wrapper-count">
-          <div onClick={() => changeCount('remove')} className="button button--outline button--circle cart__item-wrapper-count-minus">
+          <div  onClick={() => changeCount('remove')} className={clsx('button button--outline button--circle cart__item-wrapper-count-minus', {
+            'cart__item-wrapper-count-minus--disabled': count === 1
+          })}>
             <PlusSvg />
           </div>
           <b>{count}</b>
