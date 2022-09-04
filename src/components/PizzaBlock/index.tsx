@@ -5,6 +5,7 @@ import { addItem } from "redux/cart/slice";
 import { selectCartItemById } from "redux/cart/selector";
 import { Pizza } from 'redux/pizza/types';
 import { CartItem } from 'redux/cart/types';
+import { pricePrefix } from "utils/pricePrefix";
 
 
 
@@ -58,7 +59,7 @@ const PizzaBlock: React.FC<Pizza> = ({ name, price, imageUrl, sizes, types, id }
           </ul>
         </div>
         <div className="pizza-block__bottom">
-          <div className="pizza-block__price">от {price} ₽</div>
+          <div className="pizza-block__price">от {price} {pricePrefix}</div>
           <div
             onClick={addItemToCart}
             className="button button--outline button--add"

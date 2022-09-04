@@ -1,5 +1,6 @@
 import React from "react";
 import CartItem from "components/Cart/CartItem";
+import CartEmpty from "components/Cart/CartEmpty";
 import { ReactComponent as TrashSvg } from "assets/img/trash.svg";
 import { ReactComponent as CartSvg } from "assets/img/cart.svg";
 import { ReactComponent as GreyArrowLeftSvg } from "assets/img/grey-arrow-left.svg";
@@ -7,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearItems } from "redux/cart/slice";
 import { selectCart } from 'redux/cart/selector';
-import CartEmpty from "components/Cart/CartEmpty";
+import { pricePrefix } from "utils/pricePrefix";
 
 const Cart: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
@@ -44,7 +45,7 @@ const Cart: React.FC = () => {
                   Всего пицц: <b>{totalCount} шт.</b>
                 </span>
                 <span>
-                  Сумма заказа: <b>{totalPrice} ₽</b>
+                  Сумма заказа: <b>{totalPrice} {pricePrefix}</b>
                 </span>
               </div>
               <div className="cart__bottom-buttons">

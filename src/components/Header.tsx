@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import LogoSvg from "assets/img/pizza-logo.svg";
 import Search from "components/Search";
 import { useSelector } from "react-redux";
 import { selectCart } from "redux/cart/selector";
 import { setCartLocalStorage } from "utils/localStorageFunc";
+import { pricePrefix } from "utils/pricePrefix";
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
   const {totalPrice, items} = useSelector(selectCart);
@@ -34,7 +35,7 @@ const Header: React.FC = () => {
         <Search />
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
-            <span>{totalPrice} ₽</span>
+            <span>{totalPrice} {pricePrefix}</span>
             <div className="button__delimiter"></div>
             <svg
               width="18"

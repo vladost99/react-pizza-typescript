@@ -4,6 +4,7 @@ import { ReactComponent as PlusSvg } from "assets/img/plus.svg";
 import { useDispatch } from "react-redux";
 import { removeItem, minusCountItem, addItem} from "redux/cart/slice";
 import { CartItem } from "redux/cart/types";
+import { pricePrefix } from "utils/pricePrefix";
 
 
 
@@ -49,7 +50,7 @@ const CartItemC: React.FC<CartItem> = ({name, size, type, count, price, imageUrl
           </div>
         </div>
         <div className="cart__item-wrapper-price">
-          <b>{total} ₽</b>
+          <b>{total} {pricePrefix}</b>
         </div>
       </div>
       <div className="cart__item-remove">
