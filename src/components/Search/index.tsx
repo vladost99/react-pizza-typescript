@@ -1,5 +1,5 @@
 
-import React, { useCallback,  useState } from "react";
+import React, { useCallback, useState } from "react";
 import styles from "./Search.module.scss";
 import debounce from "lodash.debounce";
 import { useSelector } from "react-redux";
