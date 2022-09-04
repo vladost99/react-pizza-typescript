@@ -1,7 +1,6 @@
-import{ createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getPizzas } from "api/pizzas";
-import { RootState } from "redux/store";
-import {Pizza, FetchPizzaArgs, IPizzaSliceState } from "redux/slices/types";
+import { Pizza, FetchPizzaArgs, IPizzaSliceState } from "redux/pizza/types";
 
 
 
@@ -43,8 +42,6 @@ export const pizzasSlice = createSlice({
         })
     }
 });
-
-export const selectorPizzas = (state: RootState) => state.pizza;
 
 export const {setPizzas} = pizzasSlice.actions;
 export default pizzasSlice.reducer;

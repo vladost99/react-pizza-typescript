@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "redux/store";
-import {IFilterSliceState, Sort} from 'redux/slices/types';
+import { IFilterSliceState, Sort } from 'redux/filter/types';
 
 
 const initialState: IFilterSliceState = {
@@ -39,7 +38,7 @@ export const filtersSlice = createSlice({
 })
 
 
-export const selectFilters = (state: RootState) => state.filters;
+
 
 export const {setCategoryId, changeSort, setCurrentPage, setFilters, setValueSearch} = filtersSlice.actions;
 export default filtersSlice.reducer;

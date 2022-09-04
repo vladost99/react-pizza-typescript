@@ -1,9 +1,9 @@
 import React from "react";
+import clsx from "clsx";
 import { ReactComponent as PlusSvg } from "assets/img/plus.svg";
 import { useDispatch } from "react-redux";
-import { removeItem, minusCountItem, addItem} from "redux/slices/cartSlice";
-import { CartItem } from "redux/slices/types";
-import clsx from "clsx";
+import { removeItem, minusCountItem, addItem} from "redux/cart/slice";
+import { CartItem } from "redux/cart/types";
 
 
 

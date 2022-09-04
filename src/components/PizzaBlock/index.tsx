@@ -1,8 +1,10 @@
-import React, { useState } from "react";
 import PlusSvg from "assets/img/plus.svg";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, selectCart, selectCartItemById } from "redux/slices/cartSlice";
-import {CartItem, Pizza} from 'redux/slices/types';
+import { addItem } from "redux/cart/slice";
+import { selectCartItemById } from "redux/cart/selector";
+import { Pizza } from 'redux/pizza/types';
+import { CartItem } from 'redux/cart/types';
 
 
 

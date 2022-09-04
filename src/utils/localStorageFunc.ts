@@ -1,4 +1,4 @@
-import { CartItem } from "redux/slices/types";
+import { CartItem } from "redux/cart/types";
 import { calcTotalPrice } from "./calcTotalPrice";
 const name: string = 'cart';
 

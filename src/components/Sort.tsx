@@ -1,32 +1,28 @@
 import useClickOutside from "hooks/useClickOutside";
-import React, {  useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeSort, selectFilters } from "redux/slices/filterSlice";
+import { changeSort } from "redux/filter/slice";
+import { selectFilters } from "redux/filter/selector";
+import { Sort } from "redux/filter/types";
 
 
-
-type SortItem = {
-  name: string;
-  sortProperty:  string;
-}
-
-export const sortList: SortItem[]  = [
+export const sortList: Sort[]  = [
   { name: "популярности", sortProperty: "rating" },
   { name: "цене", sortProperty: "price" },
   { name: "алфавиту", sortProperty: "title" },
 ];
 
-const Sort: React.FC = React.memo(() => {
+const SortC: React.FC = React.memo(() => {
   const [open, setOpen] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const {sort:value} = useSelector(selectFilters);
 
-  const onChangeSort = (obj: SortItem) => {
+  const onChangeSort = (obj: Sort) => {
     dispatch(changeSort(obj));
   };
 
-  const setSort = (obj: SortItem) => {
+  const setSort = (obj: Sort) => {
     onChangeSort(obj);
     setOpen(false);
   };
@@ -72,4 +68,4 @@ const Sort: React.FC = React.memo(() => {
   );
 });
 
-export default Sort;
+export default SortC;

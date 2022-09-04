@@ -5,7 +5,8 @@ import { ReactComponent as CartSvg } from "assets/img/cart.svg";
 import { ReactComponent as GreyArrowLeftSvg } from "assets/img/grey-arrow-left.svg";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearItems, selectCart } from "redux/slices/cartSlice";
+import { clearItems } from "redux/cart/slice";
+import { selectCart } from 'redux/cart/selector';
 import CartEmpty from "components/Cart/CartEmpty";
 
 const Cart: React.FC = () => {
